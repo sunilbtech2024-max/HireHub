@@ -1,0 +1,378 @@
+.student-dashboard {
+  width: min(1120px, calc(100% - 40px));
+  min-height: 65vh;
+  margin: 0 auto;
+  padding: 44px 0 72px;
+  color: #172033;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 25px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  color: #172033;
+  font-size: clamp(1.8rem, 4vw, 2.55rem);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-header > div > p:last-child {
+  margin: 9px 0 0;
+  color: #5b6677;
+  line-height: 1.55;
+}
+
+.dashboard-eyebrow,
+.dashboard-section-label {
+  margin: 0 0 8px;
+  color: #526174;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.dashboard-secondary-action,
+.dashboard-text-link,
+.dashboard-panel-heading > a,
+.dashboard-empty-inline > a {
+  color: #344e68;
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.dashboard-secondary-action {
+  flex: 0 0 auto;
+  padding: 9px 13px;
+  border: 1px solid #cbd4df;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.dashboard-overview-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.dashboard-panel {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #e1e6ed;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.dashboard-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.dashboard-panel-heading h2 {
+  margin: 0;
+  color: #253247;
+  font-size: 1.13rem;
+  line-height: 1.35;
+}
+
+.dashboard-panel-heading .dashboard-section-label {
+  margin-bottom: 5px;
+}
+
+.dashboard-panel-heading > a {
+  flex: 0 0 auto;
+  margin-top: 4px;
+}
+
+.dashboard-progress-track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #e9edf2;
+}
+
+.dashboard-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #42658b;
+  transition: width 0.2s ease;
+}
+
+.dashboard-progress-copy {
+  margin: 9px 0 15px;
+  color: #667085;
+  font-size: 0.82rem;
+}
+
+.dashboard-profile-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.dashboard-profile-facts span {
+  max-width: 100%;
+  padding: 5px 8px;
+  border: 1px solid #e2e7ed;
+  border-radius: 5px;
+  color: #526174;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-status-pill {
+  padding: 5px 8px;
+  border-radius: 5px;
+  background: #eaf1f8;
+  color: #33536f;
+  font-size: 0.76rem;
+  font-weight: 650;
+}
+
+.dashboard-resume-name {
+  margin: 0 0 5px;
+  color: #344e68;
+  font-size: 0.92rem;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-muted,
+.dashboard-inline-error {
+  margin: 0;
+  color: #667085;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-inline-error {
+  color: #8a3434;
+}
+
+.dashboard-text-link {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.dashboard-analysis-panel,
+.dashboard-content-panel {
+  margin-top: 15px;
+}
+
+.dashboard-analysis-summary {
+  margin: 0;
+  color: #526075;
+  font-size: 0.91rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-insight-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 19px;
+  padding-top: 17px;
+  border-top: 1px solid #edf0f3;
+}
+
+.dashboard-insight-grid h3 {
+  margin: 0 0 10px;
+  color: #344e68;
+  font-size: 0.9rem;
+}
+
+.dashboard-skill-list,
+.dashboard-gap-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dashboard-skill-list li,
+.dashboard-gap-list li {
+  padding: 5px 8px;
+  border: 1px solid #e2e7ed;
+  border-radius: 5px;
+  color: #445064;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.dashboard-gap-list li {
+  border-color: #eadfcf;
+  background: #fbf8f3;
+}
+
+.dashboard-empty-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
+.dashboard-empty-inline p {
+  margin: 0;
+  color: #667085;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.dashboard-job-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.dashboard-job-list .job-listing-card {
+  padding: 16px;
+}
+
+.dashboard-job-list .job-listing-description {
+  -webkit-line-clamp: 2;
+}
+
+.dashboard-application-list {
+  gap: 10px;
+}
+
+.dashboard-application-list .application-card {
+  padding: 15px 17px;
+}
+
+.dashboard-application-list .application-card h2 {
+  font-size: 1rem;
+}
+
+.dashboard-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 17px;
+}
+
+.dashboard-quick-actions a {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 11px;
+  border: 1px solid #cbd4df;
+  border-radius: 6px;
+  background: #fff;
+  color: #344e68;
+  font-size: 0.84rem;
+  font-weight: 650;
+  text-align: center;
+  text-decoration: none;
+}
+
+.dashboard-quick-actions a:hover,
+.dashboard-secondary-action:hover {
+  background: #f5f8fc;
+}
+
+.dashboard-load-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 15px;
+  padding: 12px 15px;
+  border: 1px solid #e7c7c7;
+  border-radius: 7px;
+  background: #fffafa;
+  color: #7a3030;
+}
+
+.dashboard-load-error p {
+  margin: 0;
+  font-size: 0.87rem;
+  line-height: 1.5;
+}
+
+.dashboard-load-error button {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  border: 1px solid #d8baba;
+  border-radius: 5px;
+  background: #fff;
+  color: #7a3030;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dashboard-loading-note {
+  margin: 15px 0 0;
+  color: #667085;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .dashboard-overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-job-list {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-quick-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .student-dashboard {
+    width: min(100% - 28px, 1120px);
+    padding: 30px 0 52px;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .dashboard-panel {
+    padding: 16px;
+  }
+
+  .dashboard-panel-heading {
+    gap: 8px;
+  }
+
+  .dashboard-panel-heading h2 {
+    font-size: 1.03rem;
+  }
+
+  .dashboard-panel-heading > a {
+    font-size: 0.8rem;
+    text-align: right;
+  }
+
+  .dashboard-insight-grid {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .dashboard-quick-actions {
+    grid-template-columns: 1fr;
+  }
+}

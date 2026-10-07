@@ -1,0 +1,643 @@
+.applications-page {
+  width: min(1060px, calc(100% - 40px));
+  min-height: 65vh;
+  margin: 0 auto;
+  padding: 54px 0 76px;
+  color: #172033;
+}
+
+.applications-heading {
+  margin-bottom: 26px;
+}
+
+.application-eyebrow {
+  margin: 0 0 9px;
+  color: #526174;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.applications-heading h1,
+.application-detail-heading h1 {
+  margin: 0;
+  color: #172033;
+  font-size: clamp(2rem, 4vw, 2.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+}
+
+.applications-heading > p:not(.application-eyebrow),
+.application-detail-heading > div > p:last-child {
+  margin: 10px 0 0;
+  color: #5b6677;
+  line-height: 1.6;
+}
+
+.application-state {
+  padding: 22px;
+  border: 1px solid #e1e6ed;
+  border-radius: 9px;
+  background: #fff;
+  color: #5b6677;
+}
+
+.application-state h2,
+.application-state h1,
+.application-state p {
+  margin-top: 0;
+}
+
+.application-state-error {
+  border-color: #e7c7c7;
+  color: #7a3030;
+}
+
+.application-state button,
+.application-state-error button {
+  padding: 8px 13px;
+  border: 1px solid #cbd4df;
+  border-radius: 6px;
+  background: #fff;
+  color: #344e68;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.application-state a {
+  color: #344e68;
+  font-weight: 650;
+}
+
+.application-empty-state {
+  padding: 34px;
+  text-align: center;
+}
+
+.application-empty-state h2 {
+  color: #253247;
+  font-size: 1.3rem;
+}
+
+.application-empty-state p {
+  color: #667085;
+}
+
+.application-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.application-empty-actions a,
+.application-primary-button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 16px;
+  border: 1px solid #253247;
+  border-radius: 6px;
+  background: #253247;
+  color: #fff;
+  font: inherit;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.application-empty-actions a + a {
+  border-color: #cbd4df;
+  background: #fff;
+  color: #344e68;
+}
+
+.application-result-count {
+  margin: 0 0 13px;
+  color: #667085;
+  font-size: 0.9rem;
+}
+
+.application-card-list,
+.applicant-list {
+  display: grid;
+  gap: 13px;
+}
+
+.application-card,
+.applicant-card,
+.application-detail-card {
+  border: 1px solid #e1e6ed;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.application-card {
+  padding: 19px 21px;
+}
+
+.application-card-main,
+.applicant-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.application-card-company {
+  margin: 0 0 5px;
+  color: #667085;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.application-card h2,
+.applicant-card h2 {
+  margin: 0;
+  color: #253247;
+  font-size: 1.1rem;
+}
+
+.application-status-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: #edf1f5;
+  color: #445064;
+  font-size: 0.79rem;
+  font-weight: 650;
+  text-transform: capitalize;
+}
+
+.status-applied {
+  background: #eaf1f8;
+  color: #33536f;
+}
+
+.status-under_review,
+.status-interview {
+  background: #fff2d9;
+  color: #745416;
+}
+
+.status-shortlisted,
+.status-selected {
+  background: #e4f3eb;
+  color: #276445;
+}
+
+.status-rejected,
+.status-withdrawn {
+  background: #f7e9e9;
+  color: #833c3c;
+}
+
+.application-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 17px;
+  margin-top: 15px;
+  color: #667085;
+  font-size: 0.83rem;
+  text-transform: capitalize;
+}
+
+.application-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 17px;
+  padding-top: 13px;
+  border-top: 1px solid #edf0f3;
+}
+
+.application-card-actions a,
+.application-back-link,
+.application-detail-section a,
+.applicant-card a {
+  color: #344e68;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.application-card-actions a:hover,
+.application-back-link:hover,
+.application-detail-section a:hover,
+.applicant-card a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.application-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 23px;
+  color: #5b6677;
+  font-size: 0.9rem;
+}
+
+.application-pagination button {
+  min-height: 38px;
+  padding: 7px 12px;
+  border: 1px solid #d5dce5;
+  border-radius: 6px;
+  background: #fff;
+  color: #344e68;
+  font: inherit;
+  cursor: pointer;
+}
+
+.application-pagination button:disabled {
+  color: #98a2b3;
+  cursor: not-allowed;
+}
+
+.application-back-link {
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.application-detail-card {
+  padding: clamp(20px, 4vw, 34px);
+}
+
+.application-detail-heading {
+  padding-bottom: 22px;
+  border-bottom: 1px solid #e8ecf1;
+}
+
+.application-detail-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e8ecf1;
+}
+
+.application-detail-facts > div {
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+}
+
+.application-detail-facts span {
+  color: #778294;
+  font-size: 0.82rem;
+}
+
+.application-detail-facts strong:not(.application-status-badge) {
+  color: #253247;
+  font-size: 0.92rem;
+}
+
+.application-detail-section {
+  margin-top: 24px;
+}
+
+.application-detail-section > h2 {
+  margin: 0 0 12px;
+  color: #253247;
+  font-size: 1.04rem;
+}
+
+.application-detail-section > p {
+  margin: 0;
+  color: #5b6677;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.application-status-section {
+  display: grid;
+  gap: 15px;
+  justify-items: start;
+}
+
+.application-timeline {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.application-timeline-event {
+  position: relative;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 11px;
+  min-height: 57px;
+}
+
+.application-timeline-event:not(:last-child)::after {
+  position: absolute;
+  top: 15px;
+  bottom: -1px;
+  left: 6px;
+  width: 2px;
+  background: #d8e0e8;
+  content: "";
+}
+
+.application-timeline-marker {
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  margin-top: 2px;
+  border: 2px solid #60758c;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.application-timeline-event strong {
+  display: block;
+  color: #344054;
+  font-size: 0.9rem;
+}
+
+.application-timeline-event time {
+  display: block;
+  margin-top: 4px;
+  color: #778294;
+  font-size: 0.8rem;
+}
+
+.application-primary-button:disabled,
+.application-secondary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.application-secondary-button {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 13px;
+  border: 1px solid #cbd4df;
+  border-radius: 6px;
+  background: #fff;
+  color: #344e68;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.application-error {
+  margin: 12px 0;
+  color: #873737;
+  font-size: 0.9rem;
+}
+
+.application-success {
+  margin: 12px 0;
+  color: #276445;
+  font-weight: 600;
+}
+
+.application-form {
+  display: grid;
+  gap: 20px;
+  margin-top: 22px;
+  padding: clamp(18px, 3vw, 26px);
+  border: 1px solid #e1e6ed;
+  border-radius: 9px;
+  background: #fafbfd;
+}
+
+.application-form-heading h2 {
+  margin: 0;
+  color: #253247;
+  font-size: 1.2rem;
+}
+
+.application-form-heading p {
+  margin: 6px 0 0;
+  color: #667085;
+}
+
+.application-form label,
+.application-status-control {
+  display: grid;
+  gap: 7px;
+  color: #344054;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.application-form label > span,
+.application-resume-fields legend span {
+  color: #778294;
+  font-weight: 400;
+}
+
+.application-form input,
+.application-form textarea,
+.applicant-status-control select {
+  width: 100%;
+  padding: 10px 11px;
+  border: 1px solid #d5dce5;
+  border-radius: 6px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-size: 0.92rem;
+}
+
+.application-form textarea {
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.application-resume-fields {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid #e1e6ed;
+  border-radius: 7px;
+}
+
+.application-resume-fields legend {
+  padding: 0 5px;
+  color: #344054;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.application-form-hint {
+  margin: 0;
+  color: #778294;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.application-cover-letter > .application-form-hint {
+  justify-self: end;
+}
+
+.application-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 9px;
+}
+
+.job-applied-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px;
+  border: 1px solid #d9e5dc;
+  border-radius: 7px;
+  background: #f5faf6;
+  color: #344054;
+}
+
+.job-applied-panel a {
+  color: #344e68;
+  font-weight: 650;
+}
+
+.applicant-card {
+  padding: 19px;
+}
+
+.applicant-card-heading > div {
+  display: grid;
+  gap: 5px;
+}
+
+.applicant-card-date {
+  margin: 11px 0;
+  color: #778294;
+  font-size: 0.83rem;
+}
+
+.applicant-resume {
+  color: #5b6677;
+  font-size: 0.9rem;
+}
+
+.applicant-cover-letter {
+  margin: 15px 0;
+  padding: 13px;
+  border-radius: 6px;
+  background: #f6f8fa;
+}
+
+.applicant-cover-letter h3 {
+  margin: 0 0 7px;
+  color: #344054;
+  font-size: 0.9rem;
+}
+
+.applicant-cover-letter p {
+  margin: 0;
+  color: #5b6677;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.applicant-status-control {
+  grid-template-columns: auto minmax(150px, 220px);
+  align-items: center;
+  margin-top: 14px;
+}
+
+.applicant-status-control > span {
+  grid-column: 1 / -1;
+  color: #667085;
+  font-size: 0.82rem;
+}
+
+.application-state-error > p:last-child {
+  margin-bottom: 12px;
+}
+
+.my-jobs-section {
+  margin-top: 20px;
+}
+
+.my-jobs-list {
+  display: grid;
+  gap: 0;
+}
+
+.my-job-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 0;
+  border-top: 1px solid #e8ecf1;
+}
+
+.my-job-row h3 {
+  margin: 0;
+  color: #253247;
+  font-size: 1rem;
+}
+
+.my-job-row p,
+.my-job-row span {
+  display: block;
+  margin: 5px 0 0;
+  color: #667085;
+  font-size: 0.84rem;
+  text-transform: capitalize;
+}
+
+.my-job-row a {
+  flex: 0 0 auto;
+  color: #344e68;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+@media (max-width: 620px) {
+  .applications-page {
+    width: min(100% - 30px, 540px);
+    padding-top: 35px;
+  }
+
+  .application-card-main,
+  .applicant-card-heading {
+    display: grid;
+    justify-content: stretch;
+  }
+
+  .application-detail-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .application-form-actions {
+    justify-content: stretch;
+  }
+
+  .application-form-actions button {
+    flex: 1;
+  }
+
+  .applicant-status-control {
+    grid-template-columns: 1fr;
+  }
+
+  .my-job-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
