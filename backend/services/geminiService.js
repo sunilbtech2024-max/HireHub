@@ -121,6 +121,13 @@ const analyzeResumeText = async (resumeText) => {
     }
     return { data: validateAnalysis(parsed), model: modelName };
   } catch (error) {
+    console.error("Gemini API Error:", {
+      name: error.name,
+      message: error.message,
+      status: error.status,
+      statusCode: error.statusCode,
+      code: error.code,
+    });
     if (error instanceof GeminiServiceError) throw error;
     if (error.statusCode === 503) {
       throw new GeminiServiceError(
