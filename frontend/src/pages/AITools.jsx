@@ -47,9 +47,9 @@ function AITools() {
             career interests.
           </p>
 
-          <button className="btn btn-primary">
+          <Link to="/ai-tools/job-matching" className="btn btn-primary">
             Find Matches →
-          </button>
+          </Link>
         </div>
 
         <div className="ai-tool-card">
@@ -62,9 +62,9 @@ function AITools() {
             for your target career.
           </p>
 
-          <button className="btn btn-primary">
+          <Link to="/ai-tools/skill-gap" className="btn btn-primary">
             Check Skill Gap →
-          </button>
+          </Link>
         </div>
 
         <div className="ai-tool-card">
@@ -77,9 +77,9 @@ function AITools() {
             interview preparation.
           </p>
 
-          <button className="btn btn-primary">
+          <Link to="/ai-tools/mock-interview" className="btn btn-primary">
             Start Interview →
-          </button>
+          </Link>
         </div>
       </section>
     </main>

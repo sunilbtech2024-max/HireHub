@@ -3,6 +3,7 @@ const AIAnalysis = require("../models/AIAnalysis");
 const Job = require("../models/Job");
 const { analyzeResumeText } = require("../services/geminiService");
 const { matchJob } = require("../services/jobMatchingService");
+const { calculateSkillGap } = require("../services/skillGapService");
 
 const sendError = (res, status, message) =>
   res.status(status).json({ success: false, message });
@@ -99,4 +100,39 @@ const getRecommendedJobs = async (req, res) => {
   }
 };
 
-module.exports = { analyzeResume, getResumeAnalysis, getRecommendedJobs };
+const getSkillGap = async (req, res) => {
+  try {
+    const resume = await Resume.findOne({ studentId: req.user._id }).select("_id");
+    if (!resume) {
+      return sendError(res, 404, "Upload a resume to analyze your skill gap.");
+    }
+
+    const analysis = await AIAnalysis.findOne({
+      studentId: req.user._id,
+      resumeId: resume._id,
+    }).lean();
+    if (!analysis) {
+      return sendError(res, 404, "Analyze your resume to see your skill gap.");
+    }
+
+    const jobs = await Job.find({ status: "active" })
+      .select("skillsRequired")
+      .sort({ createdAt: -1 })
+      .limit(1000)
+      .lean();
+
+    return res.json({
+      success: true,
+      data: calculateSkillGap(analysis, jobs),
+    });
+  } catch {
+    return sendError(res, 500, "We could not load your skill gap analysis.");
+  }
+};
+
+module.exports = {
+  analyzeResume,
+  getResumeAnalysis,
+  getRecommendedJobs,
+  getSkillGap,
+};

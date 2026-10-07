@@ -104,6 +104,24 @@
   font-size: 0.9rem;
 }
 
+.mock-interview-answer {
+  width: 100%;
+  min-height: 180px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid #d5dce5;
+  border-radius: 6px;
+  color: #172033;
+  font: inherit;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+.mock-interview-answer:focus {
+  border-color: #425b76;
+  outline: 3px solid rgba(66, 91, 118, 0.14);
+}
+
 .job-filter-panel input:focus,
 .job-filter-panel select:focus {
   border-color: #425b76;

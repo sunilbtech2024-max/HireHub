@@ -10,6 +10,9 @@ import ApplicationDetails from './pages/ApplicationDetails.jsx'
 import CompanyApplicants from './pages/CompanyApplicants.jsx'
 import AITools from './pages/AITools.jsx'
 import ResumeAnalyzer from './pages/ResumeAnalyzer.jsx'
+import JobMatching from './pages/JobMatching.jsx'
+import SkillGapAnalysis from './pages/SkillGapAnalysis.jsx'
+import MockInterview from './pages/MockInterview.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 
 import './index.css'
@@ -38,6 +41,9 @@ createRoot(document.getElementById('root')).render(
           <Route element={<ProtectedRoute roles={["student"]} />}>
             <Route path="/dashboard" element={<StudentDashboard />} />
             <Route path="/ai-tools/resume-analyzer" element={<ResumeAnalyzer />} />
+            <Route path="/ai-tools/job-matching" element={<JobMatching />} />
+            <Route path="/ai-tools/skill-gap" element={<SkillGapAnalysis />} />
+            <Route path="/ai-tools/mock-interview" element={<MockInterview />} />
             <Route path="/applications" element={<MyApplications />} />
             <Route path="/applications/:id" element={<ApplicationDetails />} />
           </Route>

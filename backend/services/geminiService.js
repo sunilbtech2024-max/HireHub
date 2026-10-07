@@ -222,4 +222,68 @@ const analyzeResumeText = async (resumeText) => {
     );
   }
 };
-module.exports = { analyzeResumeText, validateAnalysis, GeminiServiceError };
+
+const generateStructuredContent = async (prompt, schema) => {
+  if (!process.env.GEMINI_API_KEY) {
+    throw new GeminiServiceError(
+      "AI mock interviews are not configured. Set GEMINI_API_KEY on the backend.",
+      503
+    );
+  }
+
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  const generate = async (model) => {
+    const response = await ai.models.generateContent({
+      model,
+      contents: prompt,
+      config: {
+        responseMimeType: "application/json",
+        responseSchema: schema,
+        maxOutputTokens: 1024,
+        httpOptions: { timeout: 45000 },
+      },
+    });
+
+    if (!response.text) {
+      throw new GeminiServiceError("The AI returned an empty response.", 502);
+    }
+
+    try {
+      return JSON.parse(response.text);
+    } catch {
+      throw new GeminiServiceError("The AI returned malformed JSON.", 502);
+    }
+  };
+
+  try {
+    try {
+      return await generate(modelName);
+    } catch (error) {
+      if (error.status !== 503 && error.status !== 504) throw error;
+    }
+
+    return await generate(fallbackModelName);
+  } catch (error) {
+    if (error instanceof GeminiServiceError) throw error;
+    if (error.name === "AbortError" || error.status === 504) {
+      throw new GeminiServiceError("AI response timed out. Please try again.", 504);
+    }
+    if (error.status === 503) {
+      throw new GeminiServiceError(
+        "AI mock interviews are temporarily unavailable. Please try again later.",
+        503
+      );
+    }
+    throw new GeminiServiceError(
+      "AI mock interview generation failed. Please try again later.",
+      502
+    );
+  }
+};
+
+module.exports = {
+  analyzeResumeText,
+  generateStructuredContent,
+  validateAnalysis,
+  GeminiServiceError,
+};
