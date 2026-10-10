@@ -1,0 +1,46 @@
+.back-button {
+  position: fixed;
+  top: 110px;
+  left: 30px;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #334155;
+
+  font-family: Arial, sans-serif;
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+  z-index: 99999;
+
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.back-button:hover {
+  color: #2563eb;
+  transform: translateX(-2px);
+}
+
+.back-button:active {
+  transform: scale(0.9);
+}
+
+@media (max-width: 768px) {
+  .back-button {
+    top: 95px;
+    left: 25px;
+    font-size: 36px;
+  }
+}

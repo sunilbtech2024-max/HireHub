@@ -23,6 +23,14 @@
   background: #ffffff;
 }
 
+.page-shell > main {
+  padding-bottom: 80px;
+}
+
+#root:has(.topbar) {
+  padding-top: 76px;
+}
+
 
 /* =========================================================
    2. NAVBAR
@@ -34,7 +42,10 @@
   width: 100%;
   height: 76px;
 
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
 
   display: flex;
   align-items: center;
@@ -325,6 +336,25 @@
   min-height: 70px;
 
   box-sizing: border-box;
+}
+
+.homepage-card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.homepage-card-link:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 4px;
+}
+
+.service-card.homepage-card-link {
+  display: flex;
+}
+
+.feature-card.homepage-card-link,
+.step-card.homepage-card-link {
+  display: block;
 }
 
 .service-card:hover {
@@ -652,6 +682,10 @@
 }
 
 .apply-button {
+  display: block;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
   width: 100%;
 
   padding: 11px 16px;
@@ -1485,6 +1519,9 @@
    ========================================================= */
 
 @media (max-width: 768px) {
+  .page-shell > main {
+    padding-bottom: 60px;
+  }
 
   /* ---------- Navbar ---------- */
 
@@ -1613,7 +1650,20 @@
    Extra adjustment for small phones
    ========================================================= */
 
+@media (max-width: 640px) {
+  #root:has(.topbar) {
+    padding-top: 80px;
+  }
+}
+
 @media (max-width: 480px) {
+  .page-shell > main {
+    padding-bottom: 50px;
+  }
+
+  #root:has(.topbar) {
+    padding-top: 72px;
+  }
 
   .topbar {
     height: 68px;
@@ -1969,6 +2019,80 @@
   background: #fff;
 }
 
+.ats-score-card {
+  margin-bottom: 14px;
+}
+
+.ats-score-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.ats-score-header .eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.ats-score-header h3 {
+  margin: 0;
+  color: #253247;
+  font-size: 1.15rem;
+}
+
+.ats-score-header .ats-score-total {
+  flex: 0 0 auto;
+  margin: 0;
+  color: #526075;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.ats-score-total strong {
+  color: #172033;
+  font-size: 2rem;
+}
+
+.ats-score-breakdown {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 24px;
+  margin: 0;
+}
+
+.ats-score-breakdown > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid #edf0f3;
+}
+
+.ats-score-breakdown dt {
+  color: #526075;
+}
+
+.ats-score-breakdown dd {
+  margin: 0;
+  color: #253247;
+  font-weight: 650;
+}
+
+.ats-score-guidance,
+.ats-score-note {
+  margin: 16px 0 0;
+  color: #526075;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.ats-score-note {
+  color: #778294;
+  font-size: 0.8rem;
+}
+
 .resume-summary-card h3,
 .resume-result-card h3 {
   margin: 0 0 12px;
@@ -2073,6 +2197,10 @@
   }
 
   .resume-result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ats-score-breakdown {
     grid-template-columns: 1fr;
   }
 

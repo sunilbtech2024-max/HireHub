@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import api from "../services/api";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -61,12 +62,18 @@ function summarizeEvaluations(evaluations) {
 }
 
 function MockInterview() {
+  const [searchParams] = useSearchParams();
   const [screen, setScreen] = useState("start");
-  const [interviewType, setInterviewType] = useState("technical");
+  const [interviewType, setInterviewType] = useState(
+    () => searchParams.get("type") === "hr" ? "hr" : "technical"
+  );
   const [roleSelection, setRoleSelection] = useState(roleOptions[0]);
   const [customRole, setCustomRole] = useState("");
   const [session, setSession] = useState(null);
   const [answer, setAnswer] = useState("");
+  const [answersByQuestion, setAnswersByQuestion] = useState({});
+  const [activeQuestionNumber, setActiveQuestionNumber] = useState(1);
+  const [questionDifficulties, setQuestionDifficulties] = useState([]);
   const [evaluations, setEvaluations] = useState([]);
   const [previousQuestions, setPreviousQuestions] = useState([]);
   const [error, setError] = useState("");
@@ -95,6 +102,9 @@ function MockInterview() {
       setSession(data.data);
       setEvaluations([]);
       setAnswer("");
+      setAnswersByQuestion({});
+      setActiveQuestionNumber(1);
+      setQuestionDifficulties([data.data.question.difficulty]);
       setPreviousQuestions([data.data.question.question]);
       setScreen("interview");
     } catch (requestError) {
@@ -106,7 +116,11 @@ function MockInterview() {
 
   const submitAnswer = async (event) => {
     event.preventDefault();
-    if (!session || !answer.trim()) {
+    if (
+      !session ||
+      activeQuestionNumber !== session.questionNumber ||
+      !answer.trim()
+    ) {
       setError("Write an answer before submitting.");
       return;
     }
@@ -121,6 +135,10 @@ function MockInterview() {
         answer: answer.trim(),
       });
       setEvaluations((current) => [...current, data.data]);
+      setAnswersByQuestion((current) => ({
+        ...current,
+        [activeQuestionNumber]: answer,
+      }));
       setScreen("feedback");
     } catch (requestError) {
       setError(getErrorMessage(requestError, "We could not evaluate your answer."));
@@ -148,6 +166,11 @@ function MockInterview() {
       });
       setSession((current) => ({ ...current, ...data.data }));
       setPreviousQuestions((current) => [...current, data.data.question.question]);
+      setQuestionDifficulties((current) => [
+        ...current,
+        data.data.question.difficulty,
+      ]);
+      setActiveQuestionNumber(nextNumber);
       setAnswer("");
       setScreen("interview");
     } catch (requestError) {
@@ -161,9 +184,21 @@ function MockInterview() {
     setScreen("start");
     setSession(null);
     setAnswer("");
+    setAnswersByQuestion({});
+    setActiveQuestionNumber(1);
+    setQuestionDifficulties([]);
     setEvaluations([]);
     setPreviousQuestions([]);
     setError("");
+  };
+
+  const selectQuestion = (questionNumber) => {
+    setAnswersByQuestion((current) => ({
+      ...current,
+      [activeQuestionNumber]: answer,
+    }));
+    setActiveQuestionNumber(questionNumber);
+    setAnswer(answersByQuestion[questionNumber] || "");
   };
 
   return (
@@ -233,40 +268,96 @@ function MockInterview() {
 
         {screen === "interview" && session && (
           <section className="resume-results" aria-labelledby="question-heading">
-            <div className="resume-results-heading">
-              <div>
-                <span className="eyebrow">
-                  QUESTION {session.questionNumber} OF {session.totalQuestions}
-                </span>
-                <h2 id="question-heading">Your question</h2>
+            <div className="mock-interview-layout">
+              <nav className="mock-interview-question-nav" aria-label="Generated interview questions">
+                {previousQuestions.map((question, index) => {
+                  const questionNumber = index + 1;
+                  return (
+                    <button
+                      key={`${question}-${questionNumber}`}
+                      type="button"
+                      className={questionNumber === activeQuestionNumber ? "is-active" : ""}
+                      aria-current={questionNumber === activeQuestionNumber ? "step" : undefined}
+                      aria-label={`Question ${questionNumber}`}
+                      onClick={() => selectQuestion(questionNumber)}
+                    >
+                      {questionNumber}
+                    </button>
+                  );
+                })}
+              </nav>
+              <div className="mock-interview-question-content">
+                <div className="resume-results-heading">
+                  <div>
+                    <span className="eyebrow">
+                      QUESTION {activeQuestionNumber} OF {session.totalQuestions}
+                    </span>
+                    <h2 id="question-heading">Your question</h2>
+                  </div>
+                  <p>
+                    {interviewType === "technical" ? "Technical" : "HR"}{" "}
+                    · {questionDifficulties[activeQuestionNumber - 1]}
+                  </p>
+                </div>
+                <article className="resume-summary-card">
+                  <h3>{previousQuestions[activeQuestionNumber - 1]}</h3>
+                </article>
+                <form className="resume-upload-card" onSubmit={submitAnswer}>
+                  <label htmlFor="mock-interview-answer"><strong>Your answer</strong></label>
+                  <textarea
+                    className="mock-interview-answer"
+                    id="mock-interview-answer"
+                    value={answer}
+                    onChange={(event) => {
+                      setAnswer(event.target.value);
+                      setAnswersByQuestion((current) => ({
+                        ...current,
+                        [activeQuestionNumber]: event.target.value,
+                      }));
+                    }}
+                    maxLength={MAX_ANSWER_LENGTH}
+                    rows={8}
+                    required
+                    readOnly={activeQuestionNumber !== session.questionNumber}
+                    placeholder="Type your answer here…"
+                  />
+                  <p className="upload-info">
+                    {answer.length}/{MAX_ANSWER_LENGTH} characters
+                  </p>
+                  <button
+                    className="btn btn-primary analyze-resume-button"
+                    disabled={
+                      isLoading ||
+                      !answer.trim() ||
+                      activeQuestionNumber !== session.questionNumber
+                    }
+                  >
+                    {isLoading ? "Evaluating your answer…" : "Submit Answer"}
+                  </button>
+                </form>
+                <div className="mock-interview-question-controls">
+                  <button
+                    type="button"
+                    className="mock-interview-question-control"
+                    onClick={() => selectQuestion(activeQuestionNumber - 1)}
+                    disabled={activeQuestionNumber === 1}
+                  >
+                    Previous
+                  </button>
+                  <span>
+                    Question {activeQuestionNumber} of {previousQuestions.length}
+                  </span>
+                  <button
+                    type="button"
+                    className="mock-interview-question-control"
+                    onClick={() => selectQuestion(activeQuestionNumber + 1)}
+                    disabled={activeQuestionNumber === previousQuestions.length}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
-              <p>
-                {session.question.category === "technical" ? "Technical" : "HR"}{" "}
-                · {session.question.difficulty}
-              </p>
             </div>
-            <article className="resume-summary-card">
-              <h3>{session.question.question}</h3>
-            </article>
-            <form className="resume-upload-card" onSubmit={submitAnswer}>
-              <label htmlFor="mock-interview-answer"><strong>Your answer</strong></label>
-              <textarea
-                className="mock-interview-answer"
-                id="mock-interview-answer"
-                value={answer}
-                onChange={(event) => setAnswer(event.target.value)}
-                maxLength={MAX_ANSWER_LENGTH}
-                rows={8}
-                required
-                placeholder="Type your answer here…"
-              />
-              <p className="upload-info">
-                {answer.length}/{MAX_ANSWER_LENGTH} characters
-              </p>
-              <button className="btn btn-primary analyze-resume-button" disabled={isLoading || !answer.trim()}>
-                {isLoading ? "Evaluating your answer…" : "Submit Answer"}
-              </button>
-            </form>
           </section>
         )}
 

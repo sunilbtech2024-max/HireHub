@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import CTA from "../components/CTA";
 
 function AITools() {
   return (
+    <>
+      <Navbar />
     <main className="ai-tools-page">
       <section className="ai-tools-hero">
         <span className="eyebrow">AI POWERED CAREER TOOLS</span>
@@ -82,7 +87,10 @@ function AITools() {
           </Link>
         </div>
       </section>
+      <CTA />
     </main>
+    <Footer />
+    </>
   );
 }
 

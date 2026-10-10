@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Features() {
   return (
     <section className="features-section" id="ai">
@@ -22,7 +24,7 @@ function Features() {
 
       <div className="features-grid">
 
-        <div className="feature-card">
+        <Link className="feature-card homepage-card-link" to="/ai-tools/resume-analyzer">
 
           <div className="feature-icon">📄</div>
 
@@ -33,10 +35,9 @@ function Features() {
             skills, strengths and areas for improvement.
           </p>
 
-        </div>
+        </Link>
 
-
-        <div className="feature-card">
+        <Link className="feature-card homepage-card-link" to="/ai-tools/job-matching">
 
           <div className="feature-icon">🎯</div>
 
@@ -47,10 +48,9 @@ function Features() {
             based on your skills and profile.
           </p>
 
-        </div>
+        </Link>
 
-
-        <div className="feature-card">
+        <Link className="feature-card homepage-card-link" to="/ai-tools/skill-gap">
 
           <div className="feature-icon">📊</div>
 
@@ -61,10 +61,9 @@ function Features() {
             understand what you need to learn next.
           </p>
 
-        </div>
+        </Link>
 
-
-        <div className="feature-card">
+        <Link className="feature-card homepage-card-link" to="/applications">
 
           <div className="feature-icon">📋</div>
 
@@ -75,7 +74,7 @@ function Features() {
             and keep your application journey organized.
           </p>
 
-        </div>
+        </Link>
 
       </div>
 

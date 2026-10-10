@@ -1,10 +1,14 @@
+import { Link } from "react-router-dom";
+
 function CTA() {
   return (
     <section className="cta-section">
 
       <div className="cta-content">
 
-        <span>START YOUR JOURNEY</span>
+        <Link to="/register" className="homepage-card-link">
+          <span>START YOUR JOURNEY</span>
+        </Link>
 
         <h2>
           Ready to Build Your
@@ -17,12 +21,12 @@ function CTA() {
           and take the next step with HireHub.
         </p>
 
-        <button
+        <Link
+          to="/register"
           className="btn btn-primary"
-          onClick={() => window.location.href = "/login"}
         >
           Get Started →
-        </button>
+        </Link>
 
       </div>
 

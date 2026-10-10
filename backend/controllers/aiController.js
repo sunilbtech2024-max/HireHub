@@ -4,15 +4,27 @@ const Job = require("../models/Job");
 const { analyzeResumeText } = require("../services/geminiService");
 const { matchJob } = require("../services/jobMatchingService");
 const { calculateSkillGap } = require("../services/skillGapService");
+const { calculateAtsResumeScore } = require("../services/atsResumeScoreService");
 
 const sendError = (res, status, message) =>
   res.status(status).json({ success: false, message });
 
-const analysisResponse = (analysis) => {
+const getAtsScore = (resumeText, analysis) => {
+  try {
+    return calculateAtsResumeScore(resumeText, analysis);
+  } catch (error) {
+    console.error("ATS resume score calculation failed:", error.message);
+    return null;
+  }
+};
+
+const analysisResponse = (analysis, atsScore) => {
   const data = analysis.toObject ? analysis.toObject() : analysis;
   delete data.studentId;
   delete data.resumeId;
   delete data.__v;
+  if (atsScore) data.atsScore = atsScore;
+  else delete data.atsScore;
   return data;
 };
 
@@ -33,18 +45,21 @@ const analyzeResume = async (req, res) => {
       existing.analyzedAt >= resume.updatedAt &&
       !reanalyze
     ) {
+      const atsScore = getAtsScore(resume.extractedText, existing);
       return res.json({
         success: true,
         cached: true,
-        data: analysisResponse(existing),
+        data: analysisResponse(existing, atsScore),
       });
     }
 
     const { data, model } = await analyzeResumeText(resume.extractedText);
+    const atsScore = getAtsScore(resume.extractedText, data);
     const analysis = await AIAnalysis.findOneAndUpdate(
       { resumeId: resume._id },
       {
         ...data,
+        ...(atsScore ? { atsScore } : {}),
         studentId: req.user._id,
         resumeId: resume._id,
         model,
@@ -52,7 +67,11 @@ const analyzeResume = async (req, res) => {
       },
       { new: true, upsert: true, runValidators: true, setDefaultsOnInsert: true }
     );
-    return res.json({ success: true, cached: false, data: analysisResponse(analysis) });
+    return res.json({
+      success: true,
+      cached: false,
+      data: analysisResponse(analysis, atsScore),
+    });
   } catch (error) {
     if (error.statusCode) {
       return sendError(res, error.statusCode, error.message);
@@ -63,14 +82,20 @@ const analyzeResume = async (req, res) => {
 
 const getResumeAnalysis = async (req, res) => {
   try {
-    const resume = await Resume.findOne({ studentId: req.user._id }).select("_id");
+    const resume = await Resume.findOne({ studentId: req.user._id }).select(
+      "_id +extractedText"
+    );
     if (!resume) return sendError(res, 404, "Upload a resume before viewing its analysis.");
     const analysis = await AIAnalysis.findOne({
       studentId: req.user._id,
       resumeId: resume._id,
     }).lean();
     if (!analysis) return sendError(res, 404, "No resume analysis is available yet.");
-    return res.json({ success: true, data: analysisResponse(analysis) });
+    const atsScore = getAtsScore(resume.extractedText, analysis);
+    return res.json({
+      success: true,
+      data: analysisResponse(analysis, atsScore),
+    });
   } catch {
     return sendError(res, 500, "We could not load your resume analysis.");
   }

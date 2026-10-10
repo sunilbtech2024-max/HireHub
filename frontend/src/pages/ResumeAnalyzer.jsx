@@ -18,6 +18,15 @@ const analysisSections = [
   ["Career suggestions", "careerSuggestions"],
   ["Improvement suggestions", "improvementSuggestions"],
 ];
+const atsBreakdownLabels = [
+  ["Keywords", "keywords"],
+  ["Technical skills", "technicalSkills"],
+  ["Resume structure", "structure"],
+  ["Projects", "projects"],
+  ["Education", "education"],
+  ["Experience", "experience"],
+  ["ATS-friendly formatting", "formatting"],
+];
 
 const loadRecommendedJobs = async (setRecommendations, setError) => {
   try {
@@ -216,6 +225,49 @@ function ResumeAnalyzer() {
             </div>
             <p>AI-generated guidance is informational and does not guarantee employment.</p>
           </div>
+          {analysis.atsScore && (
+            <article className="resume-result-card ats-score-card" aria-labelledby="ats-score-heading">
+              <div className="ats-score-header">
+                <div>
+                  <span className="eyebrow">RESUME COMPATIBILITY</span>
+                  <h3 id="ats-score-heading">ATS Resume Score</h3>
+                </div>
+                <p className="ats-score-total">
+                  <strong>{analysis.atsScore.overall}</strong> / 100
+                </p>
+              </div>
+              <dl className="ats-score-breakdown">
+                {atsBreakdownLabels.map(([label, key]) => (
+                  <div key={key}>
+                    <dt>{label}</dt>
+                    <dd>{analysis.atsScore.breakdown[key]}%</dd>
+                  </div>
+                ))}
+              </dl>
+              {(() => {
+                const rankedCategories = atsBreakdownLabels
+                  .map(([label, key]) => ({
+                    label: label.toLowerCase(),
+                    score: analysis.atsScore.breakdown[key],
+                  }))
+                  .sort((left, right) => right.score - left.score);
+                const strongest = rankedCategories[0];
+                const improvementArea = rankedCategories.at(-1);
+                return (
+                  <p className="ats-score-guidance">
+                    Your strongest area is {strongest.label}; strengthening{" "}
+                    {improvementArea.label} may improve your resume&apos;s estimated
+                    ATS compatibility.
+                  </p>
+                );
+              })()}
+              <p className="ats-score-note">
+                This is an estimated compatibility score based on resume
+                structure, keywords, skills, and content. Actual ATS results may
+                vary by employer and job description.
+              </p>
+            </article>
+          )}
           <article className="resume-summary-card">
             <h3>Resume summary</h3>
             <p>{analysis.summary}</p>

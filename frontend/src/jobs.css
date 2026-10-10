@@ -122,6 +122,94 @@
   outline: 3px solid rgba(66, 91, 118, 0.14);
 }
 
+.mock-interview-layout {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+  padding: 20px;
+  border: 1px solid #e1e6ed;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.mock-interview-question-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  align-content: start;
+}
+
+.mock-interview-question-content {
+  position: relative;
+  min-width: 0;
+}
+
+.mock-interview-question-nav button,
+.mock-interview-question-control {
+  min-width: 0;
+  min-height: 38px;
+  padding: 7px 10px;
+  border: 1px solid #d5dce5;
+  border-radius: 6px;
+  background: #fff;
+  color: #344e68;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mock-interview-question-nav button.is-active {
+  border-color: #425b76;
+  background: #eff3f7;
+  color: #172033;
+}
+
+.mock-interview-question-nav button:focus-visible,
+.mock-interview-question-control:focus-visible {
+  outline: 3px solid rgba(66, 91, 118, 0.3);
+  outline-offset: 2px;
+}
+
+.mock-interview-question-control:disabled {
+  color: #98a2b3;
+  cursor: not-allowed;
+}
+
+.mock-interview-question-controls {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  min-height: 50px;
+  color: #526174;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.mock-interview-question-controls > span {
+  display: none;
+}
+
+.mock-interview-question-controls button:first-child {
+  justify-self: start;
+}
+
+.mock-interview-question-controls button:last-child {
+  justify-self: end;
+}
+
+.mock-interview-question-content .resume-upload-card .analyze-resume-button {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 50%;
+  translate: -50% 0;
+  margin: 0;
+}
+
 .job-filter-panel input:focus,
 .job-filter-panel select:focus {
   border-color: #425b76;
@@ -492,6 +580,19 @@
   .job-detail-facts {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .mock-interview-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .mock-interview-question-nav {
+    grid-template-columns: repeat(3, minmax(36px, 44px));
+    justify-content: start;
+    gap: 6px;
+    padding: 8px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -501,6 +602,28 @@
 
   .job-filter-search {
     grid-column: auto;
+  }
+
+  .mock-interview-question-nav button,
+  .mock-interview-question-control {
+    min-height: 34px;
+    padding: 6px 8px;
+  }
+
+  .mock-interview-question-controls {
+    gap: 4px;
+    font-size: 0.8rem;
+  }
+
+  .mock-interview-question-controls .mock-interview-question-control {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+
+  .mock-interview-question-content .resume-upload-card .analyze-resume-button {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+    white-space: nowrap;
   }
 
   .job-detail-header {

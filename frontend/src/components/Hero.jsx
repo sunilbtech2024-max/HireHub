@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Hero() {
   return (
     <section className="hero" id="home">
@@ -22,23 +24,19 @@ function Hero() {
 
         <div className="hero-buttons">
 
-          <button
+          <Link
+            to="/register"
             className="btn btn-primary"
-            onClick={() => window.location.href = "/login"}
           >
             Get Started →
-          </button>
+          </Link>
 
-          <button
+          <Link
+            to="/jobs"
             className="btn btn-light"
-            onClick={() => {
-              document.getElementById("jobs")?.scrollIntoView({
-                behavior: "smooth",
-              });
-            }}
           >
             Explore Opportunities
-          </button>
+          </Link>
 
         </div>
 
@@ -47,7 +45,7 @@ function Hero() {
 
       <div className="hero-visual">
 
-        <div className="service-card">
+        <Link className="service-card homepage-card-link" to="/ai-tools/mock-interview">
 
           <div className="service-icon ai-icon">
             🤖
@@ -58,10 +56,9 @@ function Hero() {
             <p>Practice with AI</p>
           </div>
 
-        </div>
+        </Link>
 
-
-        <div className="service-card">
+        <Link className="service-card homepage-card-link" to="/ai-tools/mock-interview?type=hr">
 
           <div className="service-icon hr-icon">
             👨‍💼
@@ -72,10 +69,9 @@ function Hero() {
             <p>Prepare for interviews</p>
           </div>
 
-        </div>
+        </Link>
 
-
-        <div className="service-card">
+        <Link className="service-card homepage-card-link" to="/ai-tools/resume-analyzer">
 
           <div className="service-icon resume-icon">
             📄
@@ -86,10 +82,9 @@ function Hero() {
             <p>Improve your resume</p>
           </div>
 
-        </div>
+        </Link>
 
-
-        <div className="service-card">
+        <Link className="service-card homepage-card-link" to="/jobs">
 
           <div className="service-icon jobs-icon">
             💼
@@ -100,7 +95,7 @@ function Hero() {
             <p>Find opportunities</p>
           </div>
 
-        </div>
+        </Link>
 
       </div>
 

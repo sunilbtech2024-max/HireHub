@@ -1,4 +1,9 @@
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/useAuth";
+
 function HowItWorks() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <section className="how-it-works">
 
@@ -22,7 +27,7 @@ function HowItWorks() {
 
       <div className="steps-container">
 
-        <div className="step-card">
+        <Link className="step-card homepage-card-link" to={isAuthenticated ? "/account" : "/register"}>
 
           <div className="step-number">
             01
@@ -35,10 +40,9 @@ function HowItWorks() {
             preferences to build your HireHub profile.
           </p>
 
-        </div>
+        </Link>
 
-
-        <div className="step-card">
+        <Link className="step-card homepage-card-link" to="/ai-tools/resume-analyzer">
 
           <div className="step-number">
             02
@@ -51,10 +55,9 @@ function HowItWorks() {
             your skills, education and experience.
           </p>
 
-        </div>
+        </Link>
 
-
-        <div className="step-card">
+        <Link className="step-card homepage-card-link" to="/ai-tools/job-matching">
 
           <div className="step-number">
             03
@@ -67,10 +70,9 @@ function HowItWorks() {
             based on your profile and skills.
           </p>
 
-        </div>
+        </Link>
 
-
-        <div className="step-card">
+        <Link className="step-card homepage-card-link" to="/applications">
 
           <div className="step-number">
             04
@@ -83,7 +85,7 @@ function HowItWorks() {
             your applications in one place.
           </p>
 
-        </div>
+        </Link>
 
       </div>
 
