@@ -1,3 +1,5 @@
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
@@ -12,7 +14,7 @@ function getErrorMessage(error) {
 }
 
 function Login() {
-  const { login } = useAuth();
+  const { login, googleLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [form, setForm] = useState({ email: "", password: "" });
@@ -37,6 +39,34 @@ function Login() {
       setIsSubmitting(false);
     }
   };
+  
+  const handleGoogleLogin = async () => {
+    setError("");
+    setIsSubmitting(true);
+
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const idToken = await result.user.getIdToken();
+
+      const data = await googleLogin(idToken);
+
+      navigate(
+        location.state?.from?.pathname ||
+          dashboardPathForRole(data.user.role),
+        { replace: true }
+      );
+    } catch (requestError) {
+      setError(
+        requestError.response?.data?.message ||
+          requestError.message ||
+          "Google sign-in failed. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
 
   return (
     <div className="auth-page">
@@ -89,6 +119,10 @@ function Login() {
             />
           </div>
 
+          <div className="auth-inline-row">
+            <Link to="/forgot-password">Forgot password?</Link>
+          </div>
+
           {error && <p className="auth-error" role="alert">{error}</p>}
 
           <button
@@ -98,6 +132,16 @@ function Login() {
           >
             {isSubmitting ? "Signing in..." : "Login"}
           </button>
+          
+        <button
+          type="button"
+          className="btn btn-primary auth-submit"
+          onClick={handleGoogleLogin}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Signing in..." : "Continue with Google"}
+        </button>
+
 
         </form>
 

@@ -1108,6 +1108,25 @@
   line-height: 1.5;
 }
 
+.auth-success {
+  margin: 0;
+  color: #15803d;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.auth-hint {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.auth-hint strong {
+  color: #111827;
+  word-break: break-word;
+}
+
 .auth-status {
   padding: 2rem;
   color: #475569;
@@ -1431,6 +1450,121 @@
 
 .auth-footer a:hover {
   text-decoration: underline;
+}
+
+
+/* Password reset flow (email -> OTP -> new password) */
+
+.auth-inline-row {
+  display: flex;
+
+  justify-content: flex-end;
+
+  margin-top: -8px;
+}
+
+.auth-inline-row a {
+  color: #2563eb;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.auth-inline-row a:hover {
+  text-decoration: underline;
+}
+
+.auth-steps {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 0 0 24px;
+
+  padding: 0;
+
+  list-style: none;
+}
+
+.auth-steps li {
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  background: #f1f5f9;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.auth-steps li.is-active {
+  background: #dbeafe;
+
+  color: #1d4ed8;
+}
+
+.auth-steps li.is-complete {
+  background: #dcfce7;
+
+  color: #15803d;
+}
+
+.form-group input.auth-otp-input {
+  text-align: center;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  letter-spacing: 8px;
+}
+
+.auth-actions {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.auth-text-button {
+  align-self: center;
+
+  padding: 4px 8px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #2563eb;
+
+  font: inherit;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.auth-text-button:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.auth-text-button:disabled {
+  color: #94a3b8;
+
+  cursor: not-allowed;
 }
 
 

@@ -39,6 +39,11 @@ const userSchema = new mongoose.Schema(
         "Please provide a valid email address",
       ],
     },
+    firebaseUid: {
+     type: String,
+     unique: true,
+      sparse: true,
+    },
     password: {
       type: String,
       required: [true, "Password is required"],
@@ -98,9 +103,9 @@ const userSchema = new mongoose.Schema(
 
 // Hash password before saving
 userSchema.pre("save", async function () {
-  if (!this.isModified("password")) {
-    return;
-  }
+  if (!this.isModified("password") || this.$locals.passwordAlreadyHashed) {
+  return;
+}
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });

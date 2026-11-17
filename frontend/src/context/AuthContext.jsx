@@ -57,8 +57,19 @@ export function AuthProvider({ children }) {
     return data;
   }, [saveSession]);
 
+  const googleLogin = useCallback(async (idToken) => {
+  const { data } = await api.post("/auth/google", { idToken });
+  saveSession(data);
+  return data;
+}, [saveSession]);
+
   const register = useCallback(async (details) => {
     const { data } = await api.post("/auth/register", details);
+    return data;
+  }, []);
+
+  const verifyOtp = useCallback(async ({ email, otp }) => {
+    const { data } = await api.post("/auth/verify-otp", { email, otp });
     saveSession(data);
     return data;
   }, [saveSession]);
@@ -96,7 +107,9 @@ export function AuthProvider({ children }) {
       isLoading,
       isAuthenticated: Boolean(token && user),
       login,
+      googleLogin,
       register,
+      verifyOtp,
       updateProfile,
       updateCompanyProfile,
       requestCompanyVerification,
@@ -108,7 +121,9 @@ export function AuthProvider({ children }) {
       company,
       isLoading,
       login,
+      googleLogin,
       register,
+      verifyOtp,
       updateProfile,
       updateCompanyProfile,
       requestCompanyVerification,

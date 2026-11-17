@@ -3,6 +3,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Register from "./pages/Register.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
 import Jobs from './pages/Jobs.jsx'
 import Internships from './pages/Internships.jsx'
 import JobDetails from './pages/JobDetails.jsx'
@@ -40,6 +41,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/ai-tools" element={<AITools />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route element={<ProtectedRoute roles={["student"]} />}>
             <Route path="/dashboard" element={<StudentDashboard />} />
             <Route path="/ai-tools/resume-analyzer" element={<ResumeAnalyzer />} />
